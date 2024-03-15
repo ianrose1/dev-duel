@@ -29,16 +29,122 @@ export class DuelComponent implements OnInit {
     this.usernameTwo = valueEmitted;
   }
 
+  // whichever is first alphabetically wins
+  comapreStringFields(field1: string, field2: string) {
+    if (field1 <= field2) {
+      return true
+    }
+    return false
+  }
+
+  // whichever number is higher wins
+  compareNumberFields(field1: number, field2: number) {
+    if (field1 >= field2) {
+      return true
+    }
+    return false
+  }
+
   // ties go to user1
   duelUsers(user1: User, user2: User) {
-    if (user1.username <= user2.username) {
-      user1.winner = true;
+    user1.points = 0;
+    user1.winner = false;
+    user2.points = 0
+    user2.winner = false;
+    // username
+    if (this.comapreStringFields(user1.username, user2.username)) {
+      user1.points++
     }
     else {
-      user2.winner = true;
+      user2.points++
     }
-    if (user1.name <= user2.name) {
-      user1.winner = true;
+
+    // name
+    if (this.comapreStringFields(user1.name, user2.name)) {
+      user1.points++
+    }
+    else {
+      user2.points++
+    }
+
+    // location
+    if (this.comapreStringFields(user1.location, user2.location)) {
+      user1.points++
+    }
+    else {
+      user2.points++
+    }
+
+    // titles
+    if (user1.titles.length >= user2.titles.length) {
+      user1.points++
+    }
+    else {
+      user2.points++
+    }
+
+    // fav language
+    if (this.comapreStringFields(user1['favorite-language'], user2['favorite-language'])) {
+      user1.points++
+    }
+    else {
+      user2.points++
+    }
+
+    // total stars
+    if (this.compareNumberFields(user1['total-stars'], user2['total-stars'])) {
+      user1.points++
+    }
+    else {
+      user2.points++
+    }
+
+    // highest star count
+    if (this.compareNumberFields(user1['highest-starred'], user2['highest-starred'])) {
+      user1.points++
+    }
+    else {
+      user2.points++
+    }
+
+    // public repos
+    if (this.compareNumberFields(user1['public-repos'], user2['public-repos'])) {
+      user1.points++
+    }
+    else {
+      user2.points++
+    }
+
+    // perfect repos
+    if (this.compareNumberFields(user1['perfect-repos'], user2['perfect-repos'])) {
+      user1.points++
+    }
+    else {
+      user2.points++
+    }
+
+    // followers
+    if (this.compareNumberFields(user1.followers, user2.followers)) {
+      user1.points++
+    }
+    else {
+      user2.points++
+    }
+
+    // following
+    if (this.compareNumberFields(user1.following, user2.following)) {
+      user1.points++
+    }
+    else {
+      user2.points++
+    }
+
+    // winner
+    if (user1.points >= user2.points) {
+      user1.winner = true
+    }
+    else {
+      user2.winner = true
     }
   }
 
@@ -52,6 +158,9 @@ export class DuelComponent implements OnInit {
         if (response && response.length > 0) {
           this.user1 = response[0]
           this.user2 = response[1]
+          this.duelUsers(this.user1, this.user2)
+          console.log(this.user1)
+          console.log(this.user2)
         }
       })
       .catch((error) => {

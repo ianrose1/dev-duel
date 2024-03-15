@@ -30,6 +30,22 @@
   text-align: center;
 }
 
+#user1wins {
+  position: absolute;
+  font-size: 2.0em;
+  color: rgb(39, 91, 164);
+  bottom: 310px;
+  left: 305px;
+}
+
+#user2wins {
+  position: absolute;
+  font-size: 2.0em;
+  color: rgb(39, 91, 164);
+  bottom: 310px;
+  left: 1000px;
+}
+
 .profiles-container {
   display: flex;
   flex-direction: row;

@@ -11,6 +11,10 @@
     <p id="load">Loading...</p>
   </div>
   <div *ngIf="user1 && user2; else elseBlock">
+    <div>
+      <p *ngIf="user1.winner" id="user1wins">WINNER!</p>
+      <p *ngIf="user2.winner" id="user2wins">WINNER!</p>
+    </div>
     <div class="profiles-container">
       <div class="profile-container">
         <img id="avatar" src="{{ user1.avatar_url }}" alt="profile picture">
