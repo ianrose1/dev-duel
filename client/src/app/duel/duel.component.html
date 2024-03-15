@@ -1,21 +1,124 @@
-<div
-  style="
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20vh;
-  "
->
-  <div style="display: flex; flex-direction: row">
-    <app-text-input
-      (usernameChange)="receiveUsernameOne($event)"
-    ></app-text-input>
+<div class="page">
+  <div style="display: flex; flex-direction: row; position: absolute; right: 375px;">
+    <app-text-input (usernameChange)="receiveUsernameOne($event)"></app-text-input>
     <p style="margin: 2vh 20px">VS</p>
-    <app-text-input
-      (usernameChange)="receiveUsernameTwo($event)"
-    ></app-text-input>
+    <app-text-input (usernameChange)="receiveUsernameTwo($event)"></app-text-input>
   </div>
   <br />
   <br />
   <button class="submit-button" (click)="onSubmit()">Duel</button>
+  <div *ngIf="loading">
+    <p id="load">Loading...</p>
+  </div>
+  <div *ngIf="user1 && user2; else elseBlock">
+    <div class="profiles-container">
+      <div class="profile-container">
+        <img id="avatar" src="{{ user1.avatar_url }}" alt="profile picture">
+        <p id="bio1">{{ user1.bio }}</p>
+        <div class="info">
+          <p class="key">username</p>
+          <p class="value1">{{ user1.username }}</p>
+        </div>
+        <div class="info">
+          <p class="key">name</p>
+          <p class="value1">{{ user1.name }}</p>
+        </div>
+        <div class="info">
+          <p class="key">location</p>
+          <p class="value1">{{ user1.location }}</p>
+        </div>
+        <div class="info">
+          <p class="key">Titles</p>
+          <p class="value1">
+            <ng-container *ngFor="let title of user1.titles; let last = last">
+              {{ title }}{{ !last ? ', ' : '' }}
+            </ng-container>
+          </p>
+        </div>
+        <div class="info">
+          <p class="key">fav language</p>
+          <p class="value1">{{ user1["favorite-language"] }}</p>
+        </div>
+        <div class="info">
+          <p class="key">total stars</p>
+          <p class="value1">{{ user1["total-stars"] }}</p>
+        </div>
+        <div class="info">
+          <p class="key">highest star count</p>
+          <p class="value1">{{ user1["highest-starred"] }}</p>
+        </div>
+        <div class="info">
+          <p class="key">public repos</p>
+          <p class="value1">{{ user1["public-repos"] }}</p>
+        </div>
+        <div class="info">
+          <p class="key">perfect repos</p>
+          <p class="value1">{{ user1["perfect-repos"] }}</p>
+        </div>
+        <div class="info">
+          <p class="key">followers</p>
+          <p class="value1">{{ user1.followers }}</p>
+        </div>
+        <div class="info">
+          <p class="key">following</p>
+          <p class="value1">{{ user1.following }}</p>
+        </div>
+      </div>
+      <div class="profile-container">
+        <img id="avatar" src="{{ user2.avatar_url }}" alt="profile picture">
+        <p id="bio2">{{ user2.bio }}</p>
+        <div class="info">
+          <p class="key">username</p>
+          <p class="value2">{{ user2.username }}</p>
+        </div>
+        <div class="info">
+          <p class="key">name</p>
+          <p class="value2">{{ user2.name }}</p>
+        </div>
+        <div class="info">
+          <p class="key">location</p>
+          <p class="value2">{{ user2.location }}</p>
+        </div>
+        <div class="info">
+          <p class="key">Titles</p>
+          <p class="value2">
+            <ng-container *ngFor="let title of user2.titles; let last = last">
+              {{ title }}{{ !last ? ', ' : '' }}
+            </ng-container>
+          </p>
+        </div>
+        <div class="info">
+          <p class="key">fav language</p>
+          <p class="value2">{{ user2["favorite-language"] }}</p>
+        </div>
+        <div class="info">
+          <p class="key">total stars</p>
+          <p class="value2">{{ user2["total-stars"] }}</p>
+        </div>
+        <div class="info">
+          <p class="key">highest star count</p>
+          <p class="value2">{{ user2["highest-starred"] }}</p>
+        </div>
+        <div class="info">
+          <p class="key">public repos</p>
+          <p class="value2">{{ user2["public-repos"] }}</p>
+        </div>
+        <div class="info">
+          <p class="key">perfect repos</p>
+          <p class="value2">{{ user2["perfect-repos"] }}</p>
+        </div>
+        <div class="info">
+          <p class="key">followers</p>
+          <p class="value2">{{ user2.followers }}</p>
+        </div>
+        <div class="info">
+          <p class="key">following</p>
+          <p class="value2">{{ user2.following }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <p class="error">{{ error ? "error: User " + error.error.message : "" }}</p>
+  </ng-template>
 </div>

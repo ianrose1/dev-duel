@@ -1,13 +1,17 @@
-<nav
-  style="
+<nav style="
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     color: blueviolet;
     border-bottom: 3px solid black;
-  "
->
-  <a routerLink="/"><h1 class="link"><--Dev Duel--></h1></a>
-  <a routerLink="/inspect"><h1 class="link">Inspect</h1></a>
-  <a routerLink="/duel"><h1 class="link">Duel</h1></a>
+  ">
+  <a routerLink="/">
+    <h1 class="link" [ngStyle]="{color: isCurrentRoute('/') ? 'orange' : '#581DFF'}"><--Dev Duel--></h1>
+  </a>
+  <a routerLink="/inspect">
+    <h1 class="link" [ngStyle]="{color: isCurrentRoute('/inspect') ? 'orange' : '#581DFF'}">Inspect</h1>
+  </a>
+  <a routerLink="/duel">
+    <h1 class="link" [ngStyle]="{color: isCurrentRoute('/duel') ? 'orange' : '#581DFF'}">Duel</h1>
+  </a>
 </nav>

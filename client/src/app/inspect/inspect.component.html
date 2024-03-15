@@ -1,13 +1,66 @@
-<div
-  style="
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20vh;
-  "
->
+<div class="page">
   <app-text-input (usernameChange)="receiveUsername($event)"></app-text-input>
   <br />
   <br />
   <button class="submit-button" (click)="onSubmit()">Inspect</button>
+  <div *ngIf="loading">
+    <p>Loading...</p>
+  </div>
+  <div *ngIf="user; else elseBlock">
+    <div class="profile-container">
+      <img id="avatar" src="{{ user.avatar_url }}" alt="profile picture">
+      <p id="bio">{{ user.bio }}</p>
+      <div class="info">
+        <p class="key">username</p>
+        <p class="value">{{ user.username }}</p>
+      </div>
+      <div class="info">
+        <p class="key">name</p>
+        <p class="value">{{ user.name }}</p>
+      </div>
+      <div class="info">
+        <p class="key">location</p>
+        <p class="value">{{ user.location }}</p>
+      </div>
+      <div class="info">
+        <p class="key">Titles</p>
+        <p class="value">
+          <ng-container *ngFor="let title of user.titles; let last = last">
+            {{ title }}{{ !last ? ', ' : '' }}
+          </ng-container>
+        </p>
+      </div>
+      <div class="info">
+        <p class="key">fav language</p>
+        <p class="value">{{ user["favorite-language"] }}</p>
+      </div>
+      <div class="info">
+        <p class="key">total stars</p>
+        <p class="value">{{ user["total-stars"] }}</p>
+      </div>
+      <div class="info">
+        <p class="key">highest star count</p>
+        <p class="value">{{ user["highest-starred"] }}</p>
+      </div>
+      <div class="info">
+        <p class="key">public repos</p>
+        <p class="value">{{ user["public-repos"] }}</p>
+      </div>
+      <div class="info">
+        <p class="key">perfect repos</p>
+        <p class="value">{{ user["perfect-repos"] }}</p>
+      </div>
+      <div class="info">
+        <p class="key">followers</p>
+        <p class="value">{{ user.followers }}</p>
+      </div>
+      <div class="info">
+        <p class="key">following</p>
+        <p class="value">{{ user.following }}</p>
+      </div>
+    </div>
+  </div>
+  <ng-template #elseBlock>
+    <p class="error">{{ error ? "error: User " + error.error.message : "" }}</p>
+  </ng-template>
 </div>
